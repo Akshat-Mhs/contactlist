@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Evolent Health Contact List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/app.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<p>
+					<a th:href="@{/hello}"> Back </a>
+				</p>
+			</div>
+			<div class="col-sm-6">
+				<h2>Evolent Health Contact List</h2>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-12">
+				<table id="contactTable"
+					class="table table-bordered table-condensed table-striped">
+					<thead>
+						<tr>
+							<th>Edit</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Email</th>
+							<th>Phone Number</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody id="contactData"></tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<button type="button" id="addButton" class="btn btn-primary"
+					data-toggle="modal" data-target="#myModal">Add Contact</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Add New Contact</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Contact Detail</div>
+						<div class="panel-body"></div>
+						<div class="form-group">
+							<label for="firstname"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">First
+								Name</label> <input type="text" id="firstname" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="lastname"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Last
+								Name</label> <input type="text" id="lastname" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="email"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Email</label>
+							<input type="text" id="email" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="username"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">User
+								Name</label> <input type="text" id="username" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="password"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Password</label>
+							<input type="password" id="password" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="pnumber"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Phone
+								Number</label> <input type="text" id="pnumber" class="form-control"
+								style="display: inline-block; width: 60%; float: right; margin-right: 30px;" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green" onclick="addContact();">Add
+						Contact</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
