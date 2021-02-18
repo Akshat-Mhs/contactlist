@@ -3,6 +3,7 @@ package com.project.contact.service.impl;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,23 @@ public class UserServiceImpl implements UserService {
 		
 		user.setContactDetails(Arrays.asList(contactDetail));
 		return user;
+	}
+
+	@Override
+	public boolean updateContact(UserData userData) {
+		Optional<User> user = userDao.findById(userData.getId());
+
+		ContactDetail contactDetail = new ContactDetail();
+		int cdSize = user.get().getContactDetails().size();
+		if (cdSize > 0) {
+			contactDetail.setId(user.get().getContactDetails().get(0).getId());
+		}
+		contactDetail.setActive(userData.isActive());
+		contactDetail.setPhoneNumber(userData.getNumber());
+		contactDetail.setUser(user.get());
+		contactDetail = contactDetailDao.save(contactDetail);
+
+		return true;
 	}
 
 }

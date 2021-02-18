@@ -30,10 +30,15 @@ public class UserController {
 		} 
 		return userDatas;
 	}
-	
+
 	@PostMapping("/add")
 	public UserData saveUser(UserData userData) {
 		User user = userService.saveUser(userData);
 		return new UserData(user);
+	}
+
+	@PostMapping("/update")
+	public boolean updateContact(UserData userData) {
+		return userService.updateContact(userData);
 	}
 }

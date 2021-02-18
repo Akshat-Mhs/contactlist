@@ -14,6 +14,7 @@ public class UserData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonProperty
 	private Long id;
 	@JsonProperty
 	private String firstName;
@@ -28,6 +29,8 @@ public class UserData implements Serializable {
 	private Date createDate;
 	@JsonProperty
 	private String number;
+	@JsonProperty
+	private boolean active;
 	private List<Contacts> contacts = new ArrayList<Contacts>();
 
 	public UserData() {
@@ -37,6 +40,7 @@ public class UserData implements Serializable {
 		System.out.println(data);
 		Gson g = new Gson(); 
 		UserData d = g.fromJson(data, UserData.class);
+		this.id = d.getId();
 		this.firstName = d.getFirstName();
 		this.lastName = d.getLastName();
 		this.email = d.getEmail();
@@ -44,6 +48,7 @@ public class UserData implements Serializable {
 		this.password = d.getPassword();
 		this.createDate = new Date();
 		this.number = d.getNumber();
+		this.active = d.isActive();
 		this.contacts.add(new Contacts(d.getNumber()));
 	}
 	
@@ -128,6 +133,12 @@ public class UserData implements Serializable {
 
 	public void setContacts(List<Contacts> contacts) {
 		this.contacts = contacts;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

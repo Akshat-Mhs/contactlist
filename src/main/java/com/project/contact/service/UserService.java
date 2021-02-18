@@ -10,4 +10,7 @@ public interface UserService {
 	List<User> getContactList();
 
 	User saveUser(UserData userData);
+
+	boolean updateContact(UserData userData);
+
 }

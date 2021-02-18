@@ -118,5 +118,114 @@
 		</div>
 	</div>
 
+	<!-- The Modal -->
+	<div class="modal" id="editModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Edit Contact Details</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Contact Detail</div>
+						<div class="panel-body"></div>
+						<input type="text" id="id" class="form-control"
+							style="display: none;" readonly />
+						<div class="form-group">
+							<label for="firstname1"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">First
+								Name</label> <input type="text" id="firstname1" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;"
+								readonly />
+						</div>
+						<div class="form-group">
+							<label for="lastname1"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Last
+								Name</label> <input type="text" id="lastname1" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;"
+								readonly />
+						</div>
+						<div class="form-group">
+							<label for="email1"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Email</label>
+							<input type="text" id="email1" class="form-control"
+								style="display: inline-block; width: 70%; float: right; margin-right: 30px;"
+								readonly />
+						</div>
+						<div class="form-group">
+							<label for="pnumber1"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Phone
+								Number</label> <input type="text" id="pnumber1" class="form-control"
+								style="display: inline-block; width: 60%; float: right; margin-right: 30px;" />
+						</div>
+						<div class="form-group">
+							<label for="active"
+								style="max-width: 20%; margin-right: 40px; margin-left: 10px;">Active</label>
+							<input type="checkbox" id="active" class="form-control"
+								style="display: inline-block; width: 6%; float: right; margin-right: 58%;" />
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green"
+						onclick="updateContact();">Update Contact</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- The Modal -->
+	<div class="modal" id="contactModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Contact List(s)</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Contact Detail</div>
+						<div class="panel-body"></div>
+						<div class="row">
+							<div class="col-sm-12">
+								<table id="contactList"
+									class="table table-bordered table-condensed table-striped">
+									<thead>
+										<tr>
+											<th>Phone Number(s)</th>
+											<th>Status (Active / Inactive)</th>
+										</tr>
+									</thead>
+									<tbody id="contactListData"></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-green"
+						onclick="updateListContact();">Update</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
