@@ -47,6 +47,10 @@ public class ContactDetail implements Serializable {
 		this.user = user;
 	}
 
+	public User getUser() {
+		return user;
+	}
+	
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}

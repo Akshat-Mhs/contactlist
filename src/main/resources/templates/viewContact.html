@@ -15,13 +15,18 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-2">
 				<p>
 					<a th:href="@{/hello}"> Back </a>
 				</p>
 			</div>
 			<div class="col-sm-6">
 				<h2>Evolent Health Contact List</h2>
+			</div>
+			<div class="col-sm-4">
+				<button type="button" id="addButton" class="btn btn-primary"
+					data-toggle="modal" data-target="#myModal"
+					style="margin-top: 16px;">Add Contact</button>
 			</div>
 		</div>
 
@@ -44,12 +49,6 @@
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-sm-6">
-				<button type="button" id="addButton" class="btn btn-primary"
-					data-toggle="modal" data-target="#myModal">Add Contact</button>
-			</div>
-		</div>
 	</div>
 
 	<!-- The Modal -->
@@ -169,12 +168,17 @@
 							<input type="checkbox" id="active" class="form-control"
 								style="display: inline-block; width: 6%; float: right; margin-right: 58%;" />
 						</div>
+						<div class="form-group">
+							<button type="button" class="btn btn-primary"
+								onclick="addNewContact();" style="margin-left: 10px;">Add
+								/ Edit Contact</button>
+						</div>
 					</div>
 				</div>
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-green"
+					<button type="button" class="btn btn-primary"
 						onclick="updateContact();">Update Contact</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 				</div>
@@ -198,7 +202,12 @@
 				<div class="modal-body">
 					<div class="panel panel-primary">
 						<div class="panel-heading">Contact Detail</div>
-						<div class="panel-body"></div>
+						<div class="panel-body">
+							<button type="button" class="btn btn-primary" onclick="addNew();">Add
+								New</button>
+							<input type="text" id="uid" class="form-control"
+								style="display: none;" readonly />
+						</div>
 						<div class="row">
 							<div class="col-sm-12">
 								<table id="contactList"

@@ -31,6 +31,7 @@ public class UserData implements Serializable {
 	private String number;
 	@JsonProperty
 	private boolean active;
+	@JsonProperty
 	private List<Contacts> contacts = new ArrayList<Contacts>();
 
 	public UserData() {
@@ -50,6 +51,8 @@ public class UserData implements Serializable {
 		this.number = d.getNumber();
 		this.active = d.isActive();
 		this.contacts.add(new Contacts(d.getNumber()));
+		if (d.getContacts() != null)
+			this.contacts = d.getContacts(); 
 	}
 	
 	public UserData(User user) {

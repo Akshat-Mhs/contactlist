@@ -1,8 +1,9 @@
 $(document).ready(function() {
 	console.log("ready!");
 	getContacts();
-
 });
+
+var c = 1;
 
 function getContacts() {
 	$.ajax({
@@ -27,20 +28,80 @@ function getContacts() {
 	});
 }
 
+function updateListContact() {
+	var cdList = $('#contactListData');
+	var r_cd = cdList[0].childNodes;
+	var contacts = [];
+	var uid = 0;
+
+	for (var i = 0; i < r_cd.length; i++) {
+		var id = r_cd[i].id;
+		if (id.startsWith('idx-')) {
+			var z = id.substring(4);
+			uid = z.split("-")[0];
+			var cid = z.split("-")[1];
+			var obj = {
+				id: '99999'+cid,
+				number: $('#pnumberx-'+cid).val(),
+				active: true
+			};
+		} else {
+			var obj = {
+				id: id,
+				number: $('#pnumber-'+id).val(),
+				active: $('#active-'+id)[0].checked
+			};
+		}
+		contacts.push(obj);
+	}
+	var userData = {
+		id: uid,
+		contacts: contacts
+	};
+	console.log(userData);
+	
+	$.ajax({
+		url: '/api/contact/updateContacts',
+		type: 'post',
+		dataType: 'json',
+		success: function(result) {
+			$('#contactModal').on('hidden', function() {
+				$.clearInput();
+			});
+			getContacts();
+			$('#contactModal').modal('hide');
+		},
+		data: { userData: JSON.stringify(userData) }
+	});
+}
+
 function showContacts(result) {
 	$('#contactModal').modal('show');
+	$('#uid').val(result.id);
 	var data = "";
 	var cd = result.contacts;
 	for (var i = 0; i < cd.length; i++) {
 		var check = cd[i].active ? 'checked' : '';
-		data = data + "<tr id=\"con-" + cd[i].id + "\"> <td style=\"padding-left: 20px;\"> <input type=\"text\" id=\"pnumber-"+ cd[i].id 
-		+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\""+ cd[i].number 
-		+ "\"/> </td> <td> <input type=\"checkbox\" id=\"active-" + cd[i].id + "\" class=\"form-control\" "+ check +" /></td></tr>";
+		data = data + "<tr id=\"" + cd[i].id + "\"> <td style=\"padding-left: 20px;\"><a onclick=\"deleteContact("+cd[i].id 
+			+")\"><img alt=\"Delete\" src=\"/images/delete.png\" width=\"30\" height=\"30\" style=\"cursor: pointer;margin-right: 8px;\">"
+			+"</a> <input type=\"text\" id=\"pnumber-" + cd[i].id
+			+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\"" + cd[i].number
+			+ "\"/> </td> <td> <input type=\"checkbox\" id=\"active-" + cd[i].id + "\" class=\"form-control\" " + check + " /></td></tr>";
 	}
 
 	$("#contactListData")[0].innerHTML = data;
 }
 
+function deleteContact(id) {
+	$.ajax({
+		url: "/api/contact/deletecontact?id="+id, success: function(result) {
+			if (result) {
+				addNewContact();
+				getContacts();
+			}
+		}
+	});
+}
 
 function editContact(id) {
 	var r = $('#row-' + id)[0];
@@ -50,7 +111,7 @@ function editContact(id) {
 	$('#lastname1').val(r.childNodes[2].innerText);
 	$('#email1').val(r.childNodes[3].innerText);
 	$('#pnumber1').val(r.childNodes[4].innerText);
-	if (r.childNodes[5].innerText == "true") {
+	if (r.childNodes[5].innerText == "Active") {
 		$('#active').prop('checked', true);
 	} else {
 		$('#active').prop('checked', false);
@@ -61,7 +122,7 @@ function updateContact() {
 	var userData = {
 		id: $('#id').val(),
 		number: $('#pnumber1').val(),
-		active: $('#active').val() == 'on' ? true : false
+		active: $('#active')[0].checked
 	};
 
 	$.ajax({
@@ -76,6 +137,31 @@ function updateContact() {
 			$('#editModal').modal('hide');
 		},
 		data: { userData: JSON.stringify(userData) }
+	});
+}
+
+function addNew() {
+	var uid = $('#uid').val();
+	var data = $('#contactListData')[0].innerHTML;
+	data = data + "<tr id=\"idx-"+uid+"-" + c + "\"> <td style=\"padding-left: 20px;\"> <input type=\"text\" id=\"pnumberx-" + c
+			+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\"\"/> </td>"+
+			" <td> <input type=\"checkbox\" id=\"activex-" + c + "\" class=\"form-control\" /></td></tr>";
+	c++;
+	$('#contactListData')[0].innerHTML = data;
+}
+
+function addNewContact() {
+	var id = $('#id').val();
+	if (id == undefined || id == '')
+		id = $('#uid').val();
+	$('#editModal').modal('hide');
+	$('#contactModal').modal('show');
+	$('#uid').val(id);
+	
+	$.ajax({
+		url: "/api/user/contacts?uId="+id, success: function(result) {
+			showContacts(result);
+		}
 	});
 }
 

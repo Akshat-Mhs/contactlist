@@ -16,3 +16,10 @@ How to run the application locally
 4. To run the application - "java -jar target/com.project.contact:0.0.1-SNAPSHOT.jar"
 5. In browser use link: "http://localhost:8080/"
 6. Default Login details are "username / password" : "admin / admin"
+
+
+API View
+--------
+
+API's used in the applications can be view at the below link:
+http://localhost:8080/swagger-ui/

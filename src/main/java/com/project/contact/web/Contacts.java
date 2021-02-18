@@ -2,16 +2,23 @@ package com.project.contact.web;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.project.contact.entity.ContactDetail;
 
 public class Contacts implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@JsonProperty
 	private String number;
+	@JsonProperty
 	private Long id;
+	@JsonProperty
 	private boolean active;
 
+	public Contacts() {
+		System.out.println("Default constructor of Contacts...!!!");
+	}
 	public Contacts(ContactDetail cd) {
 		this.id = cd.getId();
 		this.number = cd.getPhoneNumber();

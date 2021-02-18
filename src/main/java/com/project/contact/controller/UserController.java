@@ -30,6 +30,13 @@ public class UserController {
 		} 
 		return userDatas;
 	}
+	
+	@GetMapping("/contacts")
+	public UserData getContacts(Long uId) {
+		User user = userService.getUser(uId);
+		UserData ud = new UserData(user);
+		return ud;
+	}
 
 	@PostMapping("/add")
 	public UserData saveUser(UserData userData) {
