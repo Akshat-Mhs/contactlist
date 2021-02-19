@@ -32,7 +32,7 @@ function updateListContact() {
 	var cdList = $('#contactListData');
 	var r_cd = cdList[0].childNodes;
 	var contacts = [];
-	var uid = 0;
+	var uid = $('#uid').val();
 
 	for (var i = 0; i < r_cd.length; i++) {
 		var id = r_cd[i].id;
@@ -41,15 +41,15 @@ function updateListContact() {
 			uid = z.split("-")[0];
 			var cid = z.split("-")[1];
 			var obj = {
-				id: '99999'+cid,
-				number: $('#pnumberx-'+cid).val(),
+				id: '99999' + cid,
+				number: $('#pnumberx-' + cid).val(),
 				active: true
 			};
 		} else {
 			var obj = {
 				id: id,
-				number: $('#pnumber-'+id).val(),
-				active: $('#active-'+id)[0].checked
+				number: $('#pnumber-' + id).val(),
+				active: $('#active-' + id)[0].checked
 			};
 		}
 		contacts.push(obj);
@@ -59,7 +59,7 @@ function updateListContact() {
 		contacts: contacts
 	};
 	console.log(userData);
-	
+
 	$.ajax({
 		url: '/api/contact/updateContacts',
 		type: 'post',
@@ -70,6 +70,9 @@ function updateListContact() {
 			});
 			getContacts();
 			$('#contactModal').modal('hide');
+		},
+		error: function(request, status, error) {
+			alert(request.responseJSON.message);
 		},
 		data: { userData: JSON.stringify(userData) }
 	});
@@ -82,9 +85,9 @@ function showContacts(result) {
 	var cd = result.contacts;
 	for (var i = 0; i < cd.length; i++) {
 		var check = cd[i].active ? 'checked' : '';
-		data = data + "<tr id=\"" + cd[i].id + "\"> <td style=\"padding-left: 20px;\"><a onclick=\"deleteContact("+cd[i].id 
-			+")\"><img alt=\"Delete\" src=\"/images/delete.png\" width=\"30\" height=\"30\" style=\"cursor: pointer;margin-right: 8px;\">"
-			+"</a> <input type=\"text\" id=\"pnumber-" + cd[i].id
+		data = data + "<tr id=\"" + cd[i].id + "\"> <td style=\"padding-left: 20px;\"><a onclick=\"deleteContact(" + cd[i].id
+			+ ")\"><img alt=\"Delete\" src=\"/images/delete.png\" width=\"30\" height=\"30\" style=\"cursor: pointer;margin-right: 8px;\">"
+			+ "</a> <input type=\"text\" id=\"pnumber-" + cd[i].id
 			+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\"" + cd[i].number
 			+ "\"/> </td> <td> <input type=\"checkbox\" id=\"active-" + cd[i].id + "\" class=\"form-control\" " + check + " /></td></tr>";
 	}
@@ -94,11 +97,15 @@ function showContacts(result) {
 
 function deleteContact(id) {
 	$.ajax({
-		url: "/api/contact/deletecontact?id="+id, success: function(result) {
+		url: "/api/contact/deletecontact?id=" + id, 
+		success: function(result) {
 			if (result) {
 				addNewContact();
 				getContacts();
 			}
+		},
+		error: function(request, status, error) {
+			alert(request.responseJSON.message);
 		}
 	});
 }
@@ -136,6 +143,9 @@ function updateContact() {
 			getContacts();
 			$('#editModal').modal('hide');
 		},
+		error: function(request, status, error) {
+			alert(request.responseJSON.message);
+		},
 		data: { userData: JSON.stringify(userData) }
 	});
 }
@@ -143,9 +153,9 @@ function updateContact() {
 function addNew() {
 	var uid = $('#uid').val();
 	var data = $('#contactListData')[0].innerHTML;
-	data = data + "<tr id=\"idx-"+uid+"-" + c + "\"> <td style=\"padding-left: 20px;\"> <input type=\"text\" id=\"pnumberx-" + c
-			+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\"\"/> </td>"+
-			" <td> <input type=\"checkbox\" id=\"activex-" + c + "\" class=\"form-control\" /></td></tr>";
+	data = data + "<tr id=\"idx-" + uid + "-" + c + "\"> <td style=\"padding-left: 20px;\"> <input type=\"text\" id=\"pnumberx-" + c
+		+ "\" class=\"form-control\" style=\"display: inline-block; width: 60%; float: right; margin-right: 30px;\" value=\"\"/> </td>" +
+		" <td> <input type=\"checkbox\" id=\"activex-" + c + "\" class=\"form-control\" /></td></tr>";
 	c++;
 	$('#contactListData')[0].innerHTML = data;
 }
@@ -157,10 +167,14 @@ function addNewContact() {
 	$('#editModal').modal('hide');
 	$('#contactModal').modal('show');
 	$('#uid').val(id);
-	
+
 	$.ajax({
-		url: "/api/user/contacts?uId="+id, success: function(result) {
+		url: "/api/user/contacts?uId=" + id, 
+		success: function(result) {
 			showContacts(result);
+		},
+		error: function(request, status, error) {
+			alert(request.responseJSON.message);
 		}
 	});
 }
@@ -191,6 +205,9 @@ function addContact() {
 			$('#password').val('');
 			$('#pnumber').val('');
 			$('#myModal').modal('hide');
+		},
+		error: function(request, status, error) {
+			alert(request.responseJSON.message);
 		},
 		data: { userData: JSON.stringify(userData) }
 	});

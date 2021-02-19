@@ -39,13 +39,13 @@ public class UserController {
 	}
 
 	@PostMapping("/add")
-	public UserData saveUser(UserData userData) {
+	public UserData saveUser(UserData userData) throws Exception {
 		User user = userService.saveUser(userData);
 		return new UserData(user);
 	}
 
 	@PostMapping("/update")
-	public boolean updateContact(UserData userData) {
+	public boolean updateContact(UserData userData) throws Exception {
 		return userService.updateContact(userData);
 	}
 }

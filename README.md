@@ -21,5 +21,5 @@ How to run the application locally
 API View
 --------
 
-API's used in the applications can be view at the below link:
+API's used in the applications can be view at the link:
 http://localhost:8080/swagger-ui/

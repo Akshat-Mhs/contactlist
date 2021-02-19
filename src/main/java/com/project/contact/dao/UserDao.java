@@ -8,4 +8,6 @@ import com.project.contact.entity.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Long> {
 
+	User findByUserName(String userName);
+	
 }

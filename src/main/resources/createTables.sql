@@ -2,8 +2,8 @@ CREATE TABLE `User` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   'FIRST_NAME' varchar2 NOT NULL,
   'LAST_NAME' varchar2 NOT NULL,
-  'EMAIL' varchar2 NOT NULL,
-  'USER_NAME' varchar2 NOT NULL,
+  'EMAIL' varchar2 NOT NULL UNIQUE,
+  'USER_NAME' varchar2 NOT NULL UNIQUE,
   'PASSWORD' varchar2 NOT NULL,
   'CREATE_DATE' DATETIME NOT NULL,
   PRIMARY KEY (`id`)
@@ -11,8 +11,8 @@ CREATE TABLE `User` (
 
 CREATE TABLE `Contact_Detail` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user__id` int(11) unsigned NOT NULL,
-  'PHONE_NUMBER' varchar2 NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  'PHONE_NUMBER' varchar2 NOT NULL UNIQUE,
   'ACTIVE'  TINYINT DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),

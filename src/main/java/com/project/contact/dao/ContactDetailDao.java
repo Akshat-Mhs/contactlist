@@ -6,4 +6,6 @@ import com.project.contact.entity.ContactDetail;
 
 public interface ContactDetailDao extends JpaRepository<ContactDetail, Long> {
 
+	ContactDetail findByPhoneNumber(String number);
+
 }

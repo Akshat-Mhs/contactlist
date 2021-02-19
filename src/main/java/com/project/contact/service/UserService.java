@@ -9,9 +9,9 @@ public interface UserService {
 
 	List<User> getContactList();
 
-	User saveUser(UserData userData);
+	User saveUser(UserData userData) throws Exception;
 
-	boolean updateContact(UserData userData);
+	boolean updateContact(UserData userData) throws Exception;
 
 	User getUser(Long uId);
 

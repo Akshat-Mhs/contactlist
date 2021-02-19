@@ -17,7 +17,7 @@ public class ContactDetailController {
 	private ContactDetailService contactDetailService;
 
 	@PostMapping("/updateContacts")
-	public boolean updateContacts(UserData userData) {
+	public boolean updateContacts(UserData userData) throws Exception {
 		return contactDetailService.updateContactDetails(userData.getId(), userData.getContacts());
 	}
 
