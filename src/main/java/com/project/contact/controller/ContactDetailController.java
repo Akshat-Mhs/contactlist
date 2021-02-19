@@ -25,4 +25,5 @@ public class ContactDetailController {
 	public boolean getDeletecontact(Long id) {
 		return contactDetailService.deleteContact(id);
 	}
+
 }

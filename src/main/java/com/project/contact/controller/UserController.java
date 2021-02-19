@@ -20,6 +20,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@GetMapping("/test")
+	public String test() {
+		return "Successful...!!!";
+	}
+	
 	@GetMapping("/contactList")
 	public List<UserData> getContactList() {
 		List<User> users = userService.getContactList();
