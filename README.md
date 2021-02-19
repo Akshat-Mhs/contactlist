@@ -13,7 +13,7 @@ How to run the application locally
 	b) maven 3.x
 2. Download the complete code on local directory.
 3. Build the code using - "mvn clean install"
-4. To run the application - "java -jar target/com.project.contact:0.0.1-SNAPSHOT.jar"
+4. To run the application - "java -jar target/contact-0.0.1-SNAPSHOT.jar"
 5. In browser use link: "http://localhost:8080/"
 6. Default Login details are "username / password" : "admin / admin"
 
